@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Iprod, IprodData } from '../model/product';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject, map } from 'rxjs';
 
 
 
@@ -30,7 +30,11 @@ export class ProductService {
     return this._http.get<any>(this.POST_URL)
     .pipe (
       map(res => {
-        
+        if (!res) {
+          return [];
+        }
+
+        return Object.keys(res).map(key => ({ ...res[key], pid: key }));
       })
     )
   }
