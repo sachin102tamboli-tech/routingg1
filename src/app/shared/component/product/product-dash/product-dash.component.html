@@ -1,0 +1,26 @@
+
+<div class="row">
+    <div class="col-12 mb-3 text-right" >
+        <button class="btn btn-sm btn-outline-primary"
+        routerLink="add">Add Product</button>
+    </div>
+    <div class="col-md-4">
+        <ul class="list-group">
+            <li *ngFor="let prod of prodArr"
+            (click)="onProductDetails(prod.pid, prod.canReturn)"
+            class="list-group-item">            >
+                <strong>
+                    {{prod.pname}}
+                </strong>
+                {{prod.pid}}
+            </li>
+        </ul>
+    </div>
+    <div class="col-md-8">
+        
+        <router-outlet></router-outlet>
+            
+    </div>
+</div>
+
+

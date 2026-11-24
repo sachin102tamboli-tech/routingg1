@@ -3,7 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  BASE_URL : "https://product-b25ca-default-rtdb.asia-southeast1.firebasedatabase.app",
+  AUTH_BASE_URL : "https://auth-git-main-iamrkjs-projects.vercel.app"
 };
 
 /*

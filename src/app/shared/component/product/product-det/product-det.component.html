@@ -1,0 +1,13 @@
+<div *ngIf="product">
+
+<p>
+    The Product is {{product.pname}}
+</p>
+<div>
+    
+    <button 
+    (click)="gotoEdit()"
+    class="btn btn-primary mr-2">Edit</button>
+    <button (click)="onRemove(prodId)" class="btn btn-danger">Remove</button>
+</div>
+

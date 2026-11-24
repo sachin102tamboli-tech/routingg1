@@ -1,0 +1,59 @@
+<main class="auth-page">
+  <section class="auth-card" aria-label="Account access">
+    <div class="brand-mark" aria-hidden="true">✦</div>
+    <p class="eyebrow">A good place to begin</p>
+    <h1>{{ mode === 'login' ? 'Welcome back' : 'Create your account' }}</h1>
+    <p class="intro">{{ mode === 'login' ? 'Sign in to pick up where you left off.' : 'Join us and get started in just a moment.' }}</p>
+
+    <div class="mode-switch" role="tablist" aria-label="Choose an account action">
+      <button type="button" role="tab" [attr.aria-selected]="mode === 'login'" [class.active]="mode === 'login'" (click)="setMode('login')">Log in</button>
+      <button type="button" role="tab" [attr.aria-selected]="mode === 'signup'" [class.active]="mode === 'signup'" (click)="setMode('signup')">Sign up</button>
+    </div>
+
+    <form [formGroup]="authForm" (ngSubmit)="submit()" novalidate>
+      <label *ngIf="mode === 'signup'" for="name">Full name</label>
+      <input *ngIf="mode === 'signup'" id="name" type="text" formControlName="name" placeholder="Your name" autocomplete="name">
+      <small class="field-error" *ngIf="submitted && fields.name.invalid">Please enter your name.</small>
+
+      <label *ngIf="mode === 'signup'" for="userRole">User role</label>
+      <select *ngIf="mode === 'signup'" id="userRole" formControlName="userRole" autocomplete="off">
+        <option value="buyer">buyer</option>
+        <option value="admin">admin</option>
+        <option value="superAdmin">superAdmin</option>
+      </select>
+
+      <label for="email">Email address</label>
+      <input id="email" type="email" formControlName="email" placeholder="you@example.com" autocomplete="email">
+      <small class="field-error" *ngIf="submitted && fields.email.invalid">Enter a valid email address.</small>
+
+      <div class="password-label">
+        <label for="password">Password</label>
+        <span *ngIf="mode === 'login'">At least 6 characters</span>
+      </div>
+      <input id="password" type="password" formControlName="password" placeholder="••••••••" [attr.autocomplete]="mode === 'login' ? 'current-password' : 'new-password'">
+      <small class="field-error" *ngIf="submitted && fields.password.invalid">Password must be at least 6 characters.</small>
+
+      <p class="form-message" role="status" *ngIf="message">{{ message }}</p>
+      <button class="submit-button" type="submit" [disabled]="loading">
+        {{ loading ? 'Please wait…' : (mode === 'login' ? 'Log in' : 'Create account') }}
+        <span aria-hidden="true">→</span>
+      </button>
+    </form>
+
+    <p class="switch-copy">
+      {{ mode === 'login' ? 'New around here?' : 'Already have an account?' }}
+      <button type="button" (click)="setMode(mode === 'login' ? 'signup' : 'login')">{{ mode === 'login' ? 'Create an account' : 'Log in' }}</button>
+    </p>
+    <p class="terms">By continuing, you agree to our <a href="#">Terms</a> and <a href="#">Privacy Policy</a>.</p>
+  </section>
+  <!-- <aside class="auth-aside" aria-label="A little inspiration">
+    <div class="aside-orbit orbit-one"></div><div class="aside-orbit orbit-two"></div>
+    <div class="aside-content">
+      <span class="aside-tag">YOUR NEXT CHAPTER</span>
+      <h2>Make room for<br>what’s next.</h2>
+      <p>Sign in to keep your plans moving, or join us and start something new.</p>
+      <div class="aside-footer"><span class="sparkle">✳</span><span>Simple beginnings.<br>Great things ahead.</span></div>
+    </div>
+    <span class="aside-number">01 / 02</span>
+  </aside> -->
+</main>
